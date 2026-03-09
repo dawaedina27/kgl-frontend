@@ -1,0 +1,298 @@
+/* Developer note from me: I maintain these styles to keep the KGL UI consistent and readable across pages. */
+.page-title {
+  margin-bottom: 16px;
+}
+
+.sales-block-gap {
+  margin-bottom: 22px;
+}
+
+.sales-record-gap {
+  margin-top: 22px;
+}
+
+#saleType,
+input,
+select {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.form-row {
+  margin-bottom: 12px;
+}
+
+.form-row label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #334155;
+}
+
+.form-button {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: var(--sidebar-bg);
+  color: var(--accent);
+  cursor: pointer;
+  margin-right: 8px;
+  margin-top: 6px;
+}
+
+.form-button.secondary {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.hidden {
+  display: none;
+}
+
+#cashTable,
+#creditTable,
+#cartTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#cashTable th,
+#cashTable td,
+#creditTable th,
+#creditTable td,
+#cartTable th,
+#cartTable td {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 13px;
+}
+
+#cashTable th,
+#creditTable th,
+#cartTable th {
+  color: #475569;
+  background: #e5e7eb;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.cart-total {
+  margin-top: 12px;
+}
+
+.cart-actions {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.doc-output {
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  padding: 14px;
+  min-height: 220px;
+  background: #f8fafc;
+}
+
+.print-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.doc-muted {
+  color: #64748b;
+}
+
+.sales-doc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.mini-btn {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.mini-btn.edit-btn {
+  border-color: #16a34a;
+  background: #dcfce7;
+  color: #166534;
+}
+
+.mini-btn.delete-btn {
+  border-color: #dc2626;
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.mini-btn + .mini-btn {
+  margin-left: 6px;
+}
+
+.mini-btn.print-btn {
+  border-color: #0f172a;
+  background: #0f172a;
+  color: #98a11c;
+}
+
+.mini-btn.print-btn i {
+  margin-right: 4px;
+}
+
+.mini-btn:hover {
+  background: #f8fafc;
+}
+
+.table-more-btn {
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: var(--sidebar-bg);
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.form-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  z-index: 1040;
+}
+
+.popup-mode {
+  position: fixed;
+  z-index: 1050;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(92vw, 760px);
+  max-height: 85vh;
+  overflow: auto;
+}
+
+.image-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  display: grid;
+  place-items: center;
+  z-index: 1100;
+}
+
+.image-modal.hidden {
+  display: none;
+}
+
+.image-modal-content {
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  width: min(92vw, 560px);
+}
+
+#produceImagePreview {
+  display: block;
+  width: 100%;
+  max-height: 380px;
+  object-fit: contain;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  margin: 12px 0;
+}
+
+.doc-title {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.doc-brand {
+  margin-bottom: 8px;
+}
+
+.doc-logo {
+  width: 56px;
+  height: auto;
+  display: block;
+  filter: brightness(0) saturate(100%) invert(8%) sepia(14%) saturate(1179%)
+    hue-rotate(183deg) brightness(95%) contrast(95%);
+}
+
+.doc-meta {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  color: #475569;
+}
+
+.sales-image-placeholder {
+  margin-top: 8px;
+  width: 100%;
+  max-width: 180px;
+  height: 120px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.sales-image-placeholder img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+}
+
+.produce-image-gallery {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.produce-image-option {
+  width: 74px;
+  height: 74px;
+  padding: 0;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.produce-image-option img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.produce-image-option.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(152, 161, 28, 0.25);
+}
+
+@media (max-width: 900px) {
+  .sales-doc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- Developer note from me: I structured this page to align with the KGL workflow and role-based navigation. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock | Sales Agent</title>
+  <link rel="stylesheet" href="../../assets/css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../../assets/css/toast.css" />
+</head>
+<body data-page-title="Stock" data-active-nav="stock">
+  <div id="salesAgentTopbar"></div>
+  <div id="salesAgentSidebar"></div>
+
+  <main class="main">
+    <section class="dashboard">
+      <div class="card">
+        <h4>Current Stock (Read Only)</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Branch</th>
+              <th>Produce</th>
+              <th>Type</th>
+              <th>Available Tonnage (kg)</th>
+              <th>Status</th>
+              <th>Selling Price (UGX)</th>
+              <th>Last Updated</th>
+            </tr>
+          </thead>
+          <tbody id="stockRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="../../assets/js/toast.js"></script>
+  <script src="../../assets/js/sales-agent-layout.js"></script>
+  <script src="../../assets/js/stock.js"></script>
+</body>
+</html>
+
+
+
+

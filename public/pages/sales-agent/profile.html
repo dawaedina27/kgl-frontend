@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!-- Developer note from me: I structured this page to align with the KGL workflow and role-based navigation. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Profile | Sales Agent</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../../assets/css/manager-pages.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../../assets/css/toast.css" />
+</head>
+<body data-page-title="My Profile" data-active-nav="profile">
+  <div id="salesAgentTopbar"></div>
+  <div id="salesAgentSidebar"></div>
+
+  <main class="main">
+    <h1 class="page-title">My Profile</h1>
+    
+    <div class="card profile-card">
+      <img src="../../assets/images/profile.jpg" alt="Profile" class="profile-preview" id="profileImageDisplay">
+      <div class="profile-details">
+        <h4 id="profileName">Loading...</h4>
+        <p class="text-muted">Role: <span id="profileRole">Sales Agent</span></p>
+        <p class="text-muted">Branch: <span id="profileBranch">Maganjo</span></p>
+        <div class="status-box">
+          <i class="fa-solid fa-circle-check" style="color: var(--accent);"></i> Active Account
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 20px; max-width: 600px;">
+      <h2>Account Details</h2>
+      <form class="simple-form">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="displayUsername" readonly>
+        </div>
+        <div class="form-group">
+          <label>Branch</label>
+          <input type="text" id="displayBranch" readonly>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="../../assets/js/toast.js"></script>
+  <script src="../../assets/js/sales-agent-layout.js"></script>
+  <script src="../../assets/js/agent-profile.js"></script>
+</body>
+</html>
+
+
+

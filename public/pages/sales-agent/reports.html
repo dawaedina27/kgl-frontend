@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<!-- Developer note from me: I structured this page to align with the KGL workflow and role-based navigation. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sales Agent Reports</title>
+  <link rel="stylesheet" href="../../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../../assets/css/manager-pages.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="../../assets/js/toast.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="../../assets/css/toast.css" />
+</head>
+<body data-page-title="Sales Agent Reports" data-active-nav="reports">
+  <div id="salesAgentTopbar"></div>
+  <div id="salesAgentSidebar"></div>
+
+  <main class="main">
+    <section class="dashboard">
+      <div class="card" style="margin-bottom: 20px;">
+        <h2>Sales Agent Report</h2>
+        <p>Here is your daily performance overview.</p>
+      </div>
+
+      <div class="kpis">
+        <div class="card">
+          <h4>Cash Sales Total</h4>
+          <b id="cashTotal">UGX 0</b>
+        </div>
+        <div class="card">
+          <h4>Credit Sales Total</h4>
+          <b id="creditTotal">UGX 0</b>
+        </div>
+        <div class="card">
+          <h4>Outstanding Credit</h4>
+          <b id="creditOutstanding">UGX 0</b>
+        </div>
+        <div class="card">
+          <h4>Net Sales</h4>
+          <b id="profitTotal">UGX 0</b>
+        </div>
+      </div>
+
+      <div class="charts">
+        <div class="card large">
+          <h4>Weekly Cash Sales vs Credit Sales (Last 7 Days)</h4>
+          <canvas id="reportWeeklySalesChart"></canvas>
+        </div>
+        <div class="card large">
+          <h4>Cash vs Credit Sales</h4>
+          <canvas id="reportSalesMixChart"></canvas>
+        </div>
+      </div>
+
+      <div class="card report-table-card">
+        <div class="table-card-header">
+          <h4>Cash Sales</h4>
+          <button id="toggleCashFiltersBtn" class="btn filter-toggle-btn" type="button">Filter</button>
+        </div>
+
+        <div class="report-download-block">
+          <button id="openReportBuilderBtn" class="btn report-download-btn" type="button">Download Report</button>
+          <div id="reportBuilderPanel" class="filter-panel hidden report-builder-panel">
+            <h4>Download Report Options</h4>
+            <div class="report-filters">
+              <div class="filter-field">
+                <label for="reportFormat">Format</label>
+                <select id="reportFormat">
+                  <option value="pdf">PDF</option>
+                  <option value="txt">TXT</option>
+                  <option value="csv">CSV</option>
+                  <option value="json">JSON</option>
+                </select>
+              </div>
+              <div class="filter-field">
+                <label>Report Options (Select 1 or more)</label>
+                <div id="reportTypeOptions" class="report-type-options">
+                  <label><input type="checkbox" name="reportTypeOption" value="cash"> Cash Sales Report</label>
+                  <label><input type="checkbox" name="reportTypeOption" value="credit"> Credit Sales Report</label>
+                </div>
+              </div>
+              <div class="filter-field hidden" id="reportAgentField">
+                <label for="reportAgent">Sales Agent</label>
+                <select id="reportAgent">
+                  <option value="">Select Agent</option>
+                </select>
+              </div>
+              <div class="filter-field">
+                <label for="reportPeriod">Period</label>
+                <select id="reportPeriod">
+                  <option value="all_time">All Time</option>
+                  <option value="hourly">Hourly</option>
+                  <option value="daily">Daily</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="yearly">Yearly</option>
+                </select>
+              </div>
+            </div>
+            <div class="filter-actions">
+              <button id="downloadCustomReportBtn" class="btn" type="button">Generate & Download</button>
+              <button id="printEntireReportBtn" class="btn" type="button">Print Entire Report</button>
+              <button id="closeReportBuilderBtn" class="btn" type="button">Close</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="cashFilterPanel" class="filter-panel hidden">
+          <div class="report-filters">
+            <div class="filter-field">
+              <label for="cashProduceFilter">Produce</label>
+              <input id="cashProduceFilter" type="text" placeholder="e.g. beans">
+            </div>
+            <div class="filter-field">
+              <label for="cashBuyerFilter">Buyer</label>
+              <input id="cashBuyerFilter" type="text" placeholder="Buyer name">
+            </div>
+            <div class="filter-field">
+              <label for="cashDateFromFilter">Date From</label>
+              <input id="cashDateFromFilter" type="date" />
+            </div>
+            <div class="filter-field">
+              <label for="cashDateToFilter">Date To</label>
+              <input id="cashDateToFilter" type="date" />
+            </div>
+          </div>
+          <div class="filter-actions">
+            <button id="applyCashFiltersBtn" class="btn" type="button">Apply Filter</button>
+            <button id="clearCashFiltersBtn" class="btn" type="button">Clear Filter</button>
+          </div>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Produce</th>
+              <th>Tonnage</th>
+              <th>Buyer</th>
+              <th>Agent</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="recentCashRows"></tbody>
+        </table>
+      </div>
+
+      <div class="card report-table-card">
+        <div class="table-card-header">
+          <h4>Credit Sales</h4>
+          <button id="toggleCreditFiltersBtn" class="btn filter-toggle-btn" type="button">Filter</button>
+        </div>
+        <div id="creditFilterPanel" class="filter-panel hidden">
+          <div class="report-filters">
+            <div class="filter-field">
+              <label for="creditProduceFilter">Produce</label>
+              <input id="creditProduceFilter" type="text" placeholder="e.g. beans">
+            </div>
+            <div class="filter-field">
+              <label for="creditBuyerFilter">Buyer</label>
+              <input id="creditBuyerFilter" type="text" placeholder="Buyer name">
+            </div>
+            <div class="filter-field">
+              <label for="creditDateFromFilter">Date From</label>
+              <input id="creditDateFromFilter" type="date" />
+            </div>
+            <div class="filter-field">
+              <label for="creditDateToFilter">Date To</label>
+              <input id="creditDateToFilter" type="date" />
+            </div>
+          </div>
+          <div class="filter-actions">
+            <button id="applyCreditFiltersBtn" class="btn" type="button">Apply Filter</button>
+            <button id="clearCreditFiltersBtn" class="btn" type="button">Clear Filter</button>
+          </div>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Buyer</th>
+              <th>Produce</th>
+              <th>Tonnage</th>
+              <th>Agent</th>
+              <th>Contact</th>
+              <th>Amount Due</th>
+              <th>Due Date</th>
+            </tr>
+          </thead>
+          <tbody id="recentCreditRows"></tbody>
+        </table>
+      </div>
+
+      <div class="card report-table-card">
+        <div class="table-card-header">
+          <h4>Damaged Produce</h4>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Produce</th>
+              <th>Lot Number</th>
+              <th>Quantity (kg)</th>
+              <th>Cause</th>
+              <th>Recorded By</th>
+              <th>Image</th>
+            </tr>
+          </thead>
+          <tbody id="damagedProduceRows"></tbody>
+        </table>
+      </div>
+
+    </section>
+  </main>
+
+  <div id="damagedImageModal" class="edit-modal hidden">
+    <div class="edit-modal-card">
+      <div class="table-card-header">
+        <h4>Damaged Produce Image</h4>
+        <button id="closeDamagedImageModalBtn" class="btn filter-toggle-btn" type="button">Close</button>
+      </div>
+      <img id="damagedImageModalPreview" class="produce-image-modal-preview" src="" alt="Damaged produce image preview">
+    </div>
+  </div>
+
+  <script src="../../assets/js/sales-agent-layout.js"></script>
+  <script src="../../assets/js/reports.js"></script>
+</body>
+</html>
+
+
+
+

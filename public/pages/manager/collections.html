@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!-- Developer note from me: I structured this page to align with the KGL workflow and role-based navigation. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receivables | Manager</title>
+  <link rel="stylesheet" href="../../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../../assets/css/manager-pages.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../../assets/css/toast.css" />
+</head>
+<body data-page-title="Receivables" data-active-nav="collections">
+  <div id="managerTopbar"></div>
+  <div id="managerSidebar"></div>
+
+  <main class="main">
+    <section class="dashboard">
+      <div class="card report-table-card">
+        <div class="table-card-header">
+          <h4>Credit Collection & Receivables</h4>
+          <button id="creditCollectionMoreBtn" class="btn filter-toggle-btn" type="button">More</button>
+        </div>
+
+        <div class="kpis">
+          <div class="card kpi-card">
+            <h4><i class="fa-solid fa-hourglass-end kpi-icon"></i> Total Outstanding</h4>
+            <b id="ccTotalOutstanding">UGX 0</b>
+          </div>
+          <div class="card kpi-card">
+            <h4><i class="fa-solid fa-hand-holding-dollar kpi-icon"></i> Collected To Date</h4>
+            <b id="ccCollectedToDate">UGX 0</b>
+          </div>
+          <div class="card kpi-card">
+            <h4><i class="fa-solid fa-triangle-exclamation kpi-icon"></i> Overdue Payment</h4>
+            <b id="ccOverdueCount">0</b>
+          </div>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Sale ID</th>
+              <th>Date</th>
+              <th>Buyer</th>
+              <th>Produce</th>
+              <th>Original Due (UGX)</th>
+              <th>Paid (UGX)</th>
+              <th>Balance (UGX)</th>
+              <th>Due Date</th>
+              <th>Days Overdue</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="creditCollectionRows"></tbody>
+          <tfoot>
+            <tr>
+              <th colspan="4">Total Amount</th>
+              <th id="ccTotalAmount">UGX 0</th>
+              <th colspan="6"></th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="card report-table-card">
+        <div class="table-card-header">
+          <h4>Settled Credit</h4>
+          <button id="settledCreditMoreBtn" class="btn filter-toggle-btn" type="button">More</button>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Sale ID</th>
+              <th>Date</th>
+              <th>Buyer</th>
+              <th>Produce</th>
+              <th>Original Due (UGX)</th>
+              <th>Paid (UGX)</th>
+              <th>Status</th>
+              <th>Settled On</th>
+            </tr>
+          </thead>
+          <tbody id="settledCreditRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="../../assets/js/toast.js"></script>
+  <script src="../../assets/js/manager-layout.js"></script>
+  <script src="../../assets/js/collections.js"></script>
+</body>
+</html>
+
+
+
+

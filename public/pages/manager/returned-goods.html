@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- Developer note from me: I structured this page to align with the KGL workflow and role-based navigation. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Returned Goods | Goods Condition</title>
+  <link rel="stylesheet" href="../../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../../assets/css/manager-pages.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../../assets/css/toast.css" />
+</head>
+<body data-page-title="Returned Goods" data-active-nav="goods-condition">
+  <div id="managerTopbar"></div>
+  <div id="managerSidebar"></div>
+
+  <main class="main">
+    <section class="dashboard">
+      <div class="card report-table-card">
+        <div class="table-card-header">
+          <h4>Director Policy: Eligible Sales For Return</h4>
+        </div>
+        <ul id="directorPolicyList" class="policy-list" data-policy-type="returnedGoods"></ul>
+      </div>
+
+      <div class="card report-table-card">
+        <div class="table-card-header">
+          <h4>Eligible Sales For Return</h4>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Sale ID</th>
+              <th>Type</th>
+              <th>Date</th>
+              <th>Buyer</th>
+              <th>Produce</th>
+              <th>Tonnage</th>
+              <th>Amount (UGX)</th>
+              <th>Agent</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="returnableSalesRows"></tbody>
+        </table>
+      </div>
+
+      <div class="card report-table-card">
+        <div class="table-card-header">
+          <h4>Returned Goods Records</h4>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Return ID</th>
+              <th>Original Sale ID</th>
+              <th>Type</th>
+              <th>Date</th>
+              <th>Buyer</th>
+              <th>Produce</th>
+              <th>Tonnage</th>
+              <th>Amount (UGX)</th>
+              <th>Returned By</th>
+              <th>Condition</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody id="returnedGoodsRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="../../assets/js/toast.js"></script>
+  <script src="../../assets/js/manager-layout.js"></script>
+  <script src="../../assets/js/goods-condition-policy-view.js"></script>
+  <script src="../../assets/js/returned-goods.js"></script>
+</body>
+</html>
+
+
+
+

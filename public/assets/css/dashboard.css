@@ -1,0 +1,671 @@
+/* Developer note from me: I maintain these styles to keep the KGL UI consistent and readable across pages. */
+/* ==========================================
+   GLOBAL RESET
+========================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body {
+  background: #f1f5f9;
+  color: #1e293b;
+   background: #f1f5f9;
+  display: block;   /* not flex */
+  margin: 0;
+}
+
+/* ==========================================
+   COLOR SYSTEM
+========================================== */
+:root {
+  --sidebar-bg: #0f172a;
+  --sidebar-text: #98a11c;
+  --accent: #98a11c;
+  --card-bg: #ffffff;
+  --border: #0f172a;
+  --shadow: 0 5px 15px rgba(0,0,0,0.08);
+  --active: #98a11c;
+  --hover: var(--accent);
+
+  /* Chart theme colors (kept aligned with current app palette) */
+  --chart-text: #0f172a;
+  --chart-ticks: #334155;
+  --chart-grid: #e2e8f0;
+  --chart-neutral: #64748b;
+  --chart-cash: #16a34a;
+  --chart-credit: #3b82f6;
+  --chart-stock: #06b6d4;
+  --chart-procurement: #1e293b;
+  --chart-profit: #22c55e;
+  --chart-loss: #ef4444;
+  --chart-p1: #0f766e;
+  --chart-p2: #16a34a;
+  --chart-p3: #3b82f6;
+  --chart-p4: #f59e0b;
+  --chart-p5: #ef4444;
+  --chart-p6: #7c3aed;
+  --chart-p7: #06b6d4;
+  --chart-p8: #84cc16;
+  --chart-p9: #f97316;
+  --chart-p10: #14b8a6;
+
+}
+
+/* ==========================================
+   TOPBAR (Fixed at Top)
+========================================== */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: var(--sidebar-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  z-index: 1000;
+  color: var(--accent);
+}
+
+
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.sidebar-toggle-btn {
+  margin-left: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid rgba(152, 161, 28, 0.55);
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-toggle-btn:hover {
+  background: rgba(152, 161, 28, 0.12);
+}
+
+.topbar-left-h2 {
+  text-align: center;
+}
+
+.logo-img {
+  height: 70px;
+  filter: brightness(0) invert(1);
+
+}
+
+/* Profile Section */
+.profile-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.topbar-print-btn {
+  width: auto;
+  margin: 0 12px 0 0;
+  padding: 8px 12px;
+}
+
+.profile-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: 180px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  display: none;
+  flex-direction: column;
+  padding: 8px 0;
+}
+
+.dropdown-menu a {
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #1e293b;
+  font-size: 14px;
+}
+
+.dropdown-menu a:hover {
+  background: #f1f5f9;
+}
+
+.dropdown-menu hr {
+  border: none;
+  height: 1px;
+  background: var(--border);
+}
+
+.dropdown-menu.show {
+  display: flex;
+}
+
+/* ==========================================
+   SIDEBAR (Fixed under Topbar)
+========================================== */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  bottom: 0;
+  background: var(--sidebar-bg);
+  padding: 0;
+  overflow: hidden;
+}
+
+.sidebar-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 15px 100px 15px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  text-decoration: none;
+  color: var(--sidebar-text);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sidebar ul li a:hover {
+  background: var(--accent);
+  color: var(--sidebar-bg);
+}
+
+.sidebar ul li.active a {
+  background: var(--accent);
+  color: var(--sidebar-bg);
+  font-weight: 600;
+}
+
+.sidebar-profile {
+  padding: 0 20px 20px 20px;
+}
+
+.sidebar-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  border-top: 1px solid rgba(148, 163, 184, 0.25);
+  background: #111b31;
+}
+
+.sidebar-user-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+}
+
+.sidebar-user-meta {
+  min-width: 0;
+}
+
+.sidebar-user-name {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #e2e8f0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-user-role {
+  margin: 2px 0 0 0;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+/* ==========================================
+   MAIN CONTENT AREA
+========================================== */
+/* .main {
+  margin-top: 70px;
+  margin-left: 240px;
+  padding: 25px;
+  height: calc(100vh - 70px);
+  overflow-y: auto; */
+/* } */
+.main {
+  margin-top: 70px;      /* space for topbar */
+  margin-left: 240px;    /* space for sidebar */
+  padding: 25px;
+  min-height: calc(100vh - 70px);
+}
+
+
+/* ==========================================
+   KPI CARDS
+========================================== */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--border);
+}
+
+.card h4 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #64748b;
+}
+
+.kpi-card h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kpi-icon {
+  color: var(--accent);
+  font-size: 15px;
+}
+
+.card b {
+  font-size: 22px;
+}
+
+/* ==========================================
+   CHART SECTION
+========================================== */
+.charts {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.card.large {
+  height: 350px;
+}
+
+.charts .pie-chart-card {
+  align-self: start;
+}
+
+.charts .pie-chart-card canvas {
+  max-height: 220px;
+}
+
+/* Director aggregated report chart sizing */
+#dirSalesCharts {
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+}
+
+#dirSalesCharts > .card:nth-child(3) {
+  height: 380px;
+}
+
+#dirSalesCharts > .card:nth-child(4) {
+  height: 460px;
+}
+
+#dirSalesCharts #dirFinancialMixPieChart {
+  max-width: 360px;
+  max-height: 300px;
+  margin: 0 auto;
+}
+
+.quick-actions-card {
+  margin-bottom: 24px;
+}
+
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.quick-actions-grid .btn {
+  margin-bottom: 0;
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+.btn {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: var(--sidebar-bg);
+  color: var(--accent);
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: var(--accent);
+  color: var(--sidebar-bg);
+}
+
+.btn-light {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.btn-light:hover {
+  background: #cbd5e1;
+  color: #0f172a;
+}
+
+/* ==========================================
+   TABLES
+========================================== */
+.table-wrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table caption,
+table caption {
+  caption-side: top;
+  text-align: left;
+  font-weight: 700;
+  color: #0f172a;
+  padding: 4px 0 8px;
+}
+
+.table th,
+.table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+  font-size: 13px;
+}
+
+.table th {
+  color: #475569;
+  font-weight: 700;
+  background: #e5e7eb;
+}
+
+.empty-row {
+  text-align: center !important;
+  color: #64748b;
+}
+
+.row-btn {
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  background: #fff;
+}
+
+.row-btn:hover {
+  background: #f8fafc;
+}
+
+/* ==========================================
+   SALES DESK
+========================================== */
+.sales-desk-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.sales-card {
+  border-left: 4px solid var(--accent);
+}
+
+.sales-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  margin: 0;
+  font-size: 13px;
+  color: #475569;
+}
+
+.field input,
+.field select {
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.sales-form .btn {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+
+.totals {
+  margin-top: 14px;
+}
+
+.totals p {
+  margin: 0 0 6px 0;
+  color: #334155;
+}
+
+.sales-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.sales-actions .btn {
+  margin-bottom: 0;
+}
+
+.doc-output {
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  padding: 14px;
+  min-height: 240px;
+  background: #f8fafc;
+}
+
+.doc-muted {
+  color: #64748b;
+}
+
+.doc-header {
+  margin-bottom: 10px;
+}
+
+.doc-header h5 {
+  font-size: 16px;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.doc-header p {
+  margin: 0 0 4px 0;
+  color: #475569;
+  font-size: 12px;
+}
+
+.doc p {
+  margin: 0 0 8px 0;
+  color: #334155;
+}
+
+.doc-totals {
+  margin-top: 10px;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+@media (max-width: 900px) {
+  .charts {
+    grid-template-columns: 1fr;
+  }
+
+  #dirSalesCharts {
+    grid-template-columns: 1fr;
+  }
+
+  .sales-desk-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .sidebar {
+    display: none;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+
+  .sales-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+body.sidebar-collapsed .sidebar {
+  display: none;
+}
+
+body.sidebar-collapsed .main {
+  margin-left: 0;
+}
+
+.global-print-btn {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1200;
+  width: auto;
+  padding: 10px 14px;
+  margin: 0;
+  box-shadow: var(--shadow);
+}
+
+.global-print-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1300;
+  padding: 16px;
+}
+
+.global-print-modal.hidden {
+  display: none;
+}
+
+.stock-status-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.stock-status-available {
+  background: #dcfce7;
+  color: #166534;
+  border-color: #86efac;
+}
+
+.stock-status-low {
+  background: #fef3c7;
+  color: #92400e;
+  border-color: #fcd34d;
+}
+
+.stock-status-out {
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #fca5a5;
+}
+
+.global-print-card {
+  width: min(720px, 96vw);
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--border);
+  padding: 16px;
+}
+
+.global-print-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+
+

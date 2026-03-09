@@ -1,0 +1,454 @@
+/* Developer note from me: I maintain these styles to keep the KGL UI consistent and readable across pages. */
+.simple-form {
+  max-width: 560px;
+}
+
+.simple-form .form-group {
+  margin-bottom: 14px;
+}
+
+.section-note {
+  margin: 4px 0 12px 0;
+  color: #475569;
+  font-size: 14px;
+}
+
+.simple-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #334155;
+}
+
+.simple-form input,
+.simple-form select {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-preview {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #cbd5e1;
+}
+
+.profile-details h4 {
+  margin-bottom: 8px;
+}
+
+.profile-details p {
+  margin: 0 0 6px 0;
+}
+
+.status-box {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 14px;
+}
+
+.report-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 10px 0 12px;
+}
+
+.filter-field label {
+  display: block;
+  margin-bottom: 6px;
+  color: #334155;
+  font-size: 13px;
+}
+
+.filter-field input,
+.filter-field select {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.filter-field textarea {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 8px 10px;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.profile-upload-field {
+  grid-column: 1 / -1;
+}
+
+.profile-upload-wrap {
+  border: 1px dashed #94a3b8;
+  border-radius: 10px;
+  padding: 10px;
+  background: #f8fafc;
+  display: grid;
+  gap: 10px;
+  max-width: 320px;
+}
+
+.profile-upload-preview {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #cbd5e1;
+  background: #e2e8f0;
+}
+
+.filter-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.filter-actions .btn {
+  width: auto;
+  margin: 0;
+  padding: 9px 12px;
+}
+
+@media (max-width: 700px) {
+  .profile-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.report-table-card + .report-table-card {
+  margin-top: 20px;
+}
+
+.goods-condition-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.goods-condition-btn {
+  width: auto;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.table-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.table-card-header h4 {
+  margin: 0;
+}
+
+.filter-toggle-btn {
+  width: auto;
+  margin: 0;
+  padding: 8px 12px;
+}
+
+.filter-panel {
+  margin-bottom: 12px;
+}
+
+.hidden {
+  display: none;
+}
+
+.report-builder-panel {
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 12px;
+  background: #f8fafc;
+}
+
+.report-builder-panel h4 {
+  margin: 0 0 10px 0;
+}
+
+.report-download-block {
+  margin: 10px 0 14px;
+}
+
+.report-download-btn {
+  width: auto;
+  margin: 0 0 10px 0;
+  padding: 9px 12px;
+}
+
+.report-type-options {
+  display: grid;
+  gap: 6px;
+}
+
+.report-type-options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #334155;
+}
+
+.row-btn.collect-btn {
+  background: #0f172a;
+  color: #98a11c;
+  border-color: #0f172a;
+}
+
+.row-btn.collect-btn:hover {
+  background: #1e293b;
+  color: #cbd534;
+}
+
+.edit-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1200;
+}
+
+.edit-modal.hidden {
+  display: none;
+}
+
+.edit-modal-card {
+  width: min(640px, 100%);
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  padding: 16px;
+}
+
+.produce-image-modal-preview {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.registered-users-table {
+  min-width: 1100px;
+}
+
+.registered-users-table th,
+.registered-users-table td {
+  white-space: nowrap;
+  padding: 8px 6px;
+  font-size: 12px;
+}
+
+.registered-users-table .table-action-stack {
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.registered-users-table .table-action-stack .row-btn {
+  white-space: nowrap;
+}
+
+.user-table-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #cbd5e1;
+  background: #e2e8f0;
+}
+
+.admin-section-gap {
+  margin-top: 14px;
+}
+
+.table-action-stack {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.report-gap-top {
+  margin-top: 20px;
+}
+
+.policy-list {
+  list-style: disc;
+  padding-left: 18px;
+  margin: 8px 0 0 0;
+  display: grid;
+  gap: 8px;
+}
+
+.policy-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.policy-content {
+  display: grid;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.policy-title {
+  color: #0f172a;
+  font-size: 13px;
+}
+
+.policy-text {
+  color: #334155;
+  font-size: 14px;
+}
+
+.policy-readonly-text {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.branch-directory-table {
+  width: 100%;
+  min-width: 980px;
+  table-layout: fixed;
+}
+
+.branch-directory-table th,
+.branch-directory-table td {
+  vertical-align: top;
+  padding: 7px 5px;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.branch-directory-table td:nth-child(5),
+.branch-directory-table th:nth-child(5) {
+  white-space: nowrap;
+  text-align: center;
+}
+
+.branch-directory-table td:nth-child(6),
+.branch-directory-table th:nth-child(6) {
+  white-space: nowrap;
+}
+
+.branch-directory-table td .table-action-stack {
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.row-btn[data-user-edit],
+.row-btn[data-branch-edit] {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #1d4ed8;
+}
+
+.row-btn[data-user-edit]:hover,
+.row-btn[data-branch-edit]:hover {
+  background: #1d4ed8;
+}
+
+.row-btn[data-user-toggle],
+.row-btn[data-branch-toggle] {
+  background: #d97706;
+  color: #ffffff;
+  border-color: #b45309;
+}
+
+.row-btn[data-user-toggle]:hover,
+.row-btn[data-branch-toggle]:hover {
+  background: #b45309;
+}
+
+.row-btn[data-user-delete],
+.row-btn[data-branch-delete] {
+  background: #dc2626;
+  color: #ffffff;
+  border-color: #b91c1c;
+}
+
+.row-btn[data-user-delete]:hover,
+.row-btn[data-branch-delete]:hover {
+  background: #b91c1c;
+}
+
+.status-chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.status-paid {
+  background: #dcfce7;
+  color: #166534;
+  border-color: #86efac;
+}
+
+.status-overdue {
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #fca5a5;
+}
+
+.status-partial {
+  background: #fef3c7;
+  color: #92400e;
+  border-color: #fcd34d;
+}
+
+.status-pending {
+  background: #e2e8f0;
+  color: #334155;
+  border-color: #cbd5e1;
+}
+
+@media (max-width: 520px) {
+  .registered-users-table .table-action-stack {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  .registered-users-table .table-action-stack .row-btn {
+    width: auto;
+    white-space: nowrap;
+  }
+}
+

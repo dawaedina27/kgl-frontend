@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- Developer note from me: I structured this page to align with the KGL workflow and role-based navigation. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suppliers | Manager</title>
+  <link rel="stylesheet" href="../../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../../assets/css/manager-pages.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../../assets/css/toast.css" />
+</head>
+<body data-page-title="Suppliers" data-active-nav="suppliers">
+  <div id="managerTopbar"></div>
+  <div id="managerSidebar"></div>
+
+  <main class="main">
+    <section class="dashboard">
+      <div class="card report-table-card">
+        <div class="table-card-header">
+          <h4>Suppliers Directory</h4>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Supplier Name</th>
+              <th>Contact</th>
+              <th>Total Procurements</th>
+              <th>Total Tonnage (kg)</th>
+              <th>Total Expenditure (UGX)</th>
+              <th>Last Produce</th>
+              <th>Last Supplied At</th>
+            </tr>
+          </thead>
+          <tbody id="suppliersRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="../../assets/js/toast.js"></script>
+  <script src="../../assets/js/manager-layout.js"></script>
+  <script src="../../assets/js/suppliers.js"></script>
+</body>
+</html>
+
+
+
+

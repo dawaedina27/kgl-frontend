@@ -1,0 +1,299 @@
+<!doctype html>
+<!-- Developer note from me: I structured this page to align with the KGL workflow and role-based navigation. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administration</title>
+  <link rel="stylesheet" href="../../../assets/css/dashboard.css" />
+  <link rel="stylesheet" href="../../../assets/css/manager-pages.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../../assets/css/toast.css" />
+</head>
+<body data-page-title="Administration" data-active-nav="administration">
+  <div id="directorTopbar"></div>
+  <div id="directorSidebar"></div>
+
+  <main class="main">
+    <section class="dashboard">
+      <div class="card">
+        <div class="table-card-header">
+          <h4>Administration Corner</h4>
+        </div>
+        <div class="filter-actions">
+          <button id="dirShowUserManagementBtn" class="btn" type="button">User Management</button>
+          <button id="dirShowBranchManagementBtn" class="btn" type="button">Branch Management</button>
+          <button id="dirShowPolicyManagementBtn" class="btn" type="button">Goods Condition Policies</button>
+        </div>
+        <p class="section-note">Use the buttons above to switch between user, branch, and goods condition policy management.</p>
+      </div>
+
+      <section id="dirUserManagementSection" class="admin-section-gap">
+        <div class="card report-table-card">
+          <div class="table-card-header">
+            <h4>Create User (Director Only)</h4>
+            <button id="dirToggleCreateUserBtn" class="btn filter-toggle-btn" type="button">Add User</button>
+          </div>
+          <form id="dirCreateUserForm" class="simple-form hidden" novalidate>
+            <div class="report-filters">
+              <div class="filter-field">
+                <label for="newUserName">Name</label>
+                <input id="newUserName" type="text" placeholder="Full name" required>
+              </div>
+              <div class="filter-field">
+                <label for="newUserEmail">Email</label>
+                <input id="newUserEmail" type="email" placeholder="name@example.com" required>
+              </div>
+              <div class="filter-field">
+                <label for="newUserPhone">Phone</label>
+                <input id="newUserPhone" type="tel" placeholder="+256700000000" required>
+              </div>
+              <div class="filter-field">
+                <label for="newUsername">Username</label>
+                <input id="newUsername" type="text" placeholder="Login username" required>
+              </div>
+              <div class="filter-field">
+                <label for="newPassword">Password</label>
+                <input id="newPassword" type="password" placeholder="Password" required>
+              </div>
+              <div class="filter-field">
+                <label for="newRole">Role</label>
+                <select id="newRole" required>
+                  <option value="">Select role</option>
+                  <option value="Manager">Manager</option>
+                  <option value="SalesAgent">Sales Agent</option>
+                  <option value="Director">Director</option>
+                </select>
+              </div>
+              <div class="filter-field">
+                <label for="newBranch">Branch</label>
+                <select id="newBranch" required>
+                  <option value="">Select branch</option>
+                </select>
+              </div>
+              <div class="filter-field profile-upload-field">
+                <label for="newUserProfileImage">Profile Image</label>
+                <div class="profile-upload-wrap">
+                  <img
+                    id="newUserProfilePreview"
+                    class="profile-upload-preview"
+                    src="../../../assets/images/profile.jpg"
+                    alt="Profile image preview"
+                  >
+                  <input id="newUserProfileImage" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+                  <small class="section-note">Optional. Upload a clear face photo (max 2 MB).</small>
+                </div>
+              </div>
+            </div>
+            <div class="filter-actions">
+              <button id="dirCreateUserBtn" class="btn" type="submit">Create User</button>
+            </div>
+            <p id="dirCreateUserStatus" class="section-note"></p>
+          </form>
+        </div>
+
+        <div class="card report-table-card">
+          <div class="table-card-header">
+            <h4>Registered Users</h4>
+          </div>
+          <div class="table-wrap">
+            <table class="table registered-users-table">
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Username</th>
+                  <th>Role</th>
+                  <th>Branch</th>
+                  <th>Status</th>
+                  <th>Created</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="dirUsersRows"></tbody>
+            </table>
+          </div>
+          <button id="dirUsersMoreBtn" class="btn" type="button" style="width:auto; margin-top:10px;">More</button>
+        </div>
+      </section>
+
+      <section id="dirBranchManagementSection" class="hidden admin-section-gap">
+        <div class="card report-table-card">
+          <div class="table-card-header">
+            <h4>Branch Management</h4>
+            <button id="dirToggleAddBranchBtn" class="btn filter-toggle-btn" type="button">Add Branch</button>
+          </div>
+          <div class="kpis">
+            <div class="card">
+              <h4>Total Branches</h4>
+              <b id="dirTotalBranches">0</b>
+            </div>
+          </div>
+          <form id="dirAddBranchForm" class="simple-form hidden" novalidate>
+            <div class="report-filters">
+              <div class="filter-field">
+                <label for="dirBranchNameInput">Branch Name</label>
+                <input id="dirBranchNameInput" type="text" placeholder="e.g. Matugga" required>
+              </div>
+              <div class="filter-field">
+                <label for="dirBranchAddressInput">Address</label>
+                <input id="dirBranchAddressInput" type="text" placeholder="Branch address" required>
+              </div>
+            </div>
+            <div class="filter-actions">
+              <button class="btn" type="submit">Save Branch</button>
+            </div>
+            <p id="dirAddBranchStatus" class="section-note"></p>
+          </form>
+        </div>
+
+        <div class="card report-table-card">
+          <div class="table-card-header">
+            <h4>Branches Directory (Address + Manager Contacts)</h4>
+          </div>
+          <div class="table-wrap">
+            <table class="table branch-directory-table">
+              <colgroup>
+                <col style="width: 14%;">
+                <col style="width: 24%;">
+                <col style="width: 18%;">
+                <col style="width: 24%;">
+                <col style="width: 8%;">
+                <col style="width: 12%;">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>Branch</th>
+                  <th>Address</th>
+                  <th>Manager Name(s)</th>
+                  <th>Manager Contact(s)</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="dirBranchRows">
+                <tr><td colspan="6">Loading branch details...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="dirPolicyManagementSection" class="hidden admin-section-gap">
+        <div class="card report-table-card">
+          <div class="table-card-header">
+            <h4>Goods Condition Policies</h4>
+          </div>
+          <p class="section-note">Choose the policy type you want to manage.</p>
+          <div class="filter-actions">
+            <button id="dirShowReturnedPolicyBtn" class="btn" type="button">Eligible Sales For Return Policy</button>
+            <button id="dirShowDamagedPolicyBtn" class="btn" type="button">Damaged Produce Policy</button>
+          </div>
+        </div>
+
+        <div id="dirReturnedPolicyPanel" class="card report-table-card">
+          <div class="table-card-header">
+            <h4>Eligible Sales For Return Policy</h4>
+          </div>
+          <div class="filter-field">
+            <label for="returnedPolicyText">Policy Text</label>
+            <textarea id="returnedPolicyText" rows="3" placeholder="Type return policy"></textarea>
+          </div>
+          <div class="filter-actions">
+            <button id="addReturnedPolicyBtn" class="btn" type="button">Add New Policy</button>
+          </div>
+          <ul id="returnedPolicyRows" class="policy-list"></ul>
+        </div>
+
+        <div id="dirDamagedPolicyPanel" class="card report-table-card hidden">
+          <div class="table-card-header">
+            <h4>Damaged Produce Policy</h4>
+          </div>
+          <div class="filter-field">
+            <label for="damagedPolicyText">Policy Text</label>
+            <textarea id="damagedPolicyText" rows="3" placeholder="Type damaged produce policy"></textarea>
+          </div>
+          <div class="filter-actions">
+            <button id="generateDamagedPoliciesBtn" class="btn" type="button">Generate Damaged Policies</button>
+            <button id="addDamagedPolicyBtn" class="btn" type="button">Add New Policy</button>
+          </div>
+          <ul id="damagedPolicyRows" class="policy-list"></ul>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div id="dirEditUserModal" class="edit-modal hidden" role="dialog" aria-modal="true" aria-labelledby="dirEditUserTitle">
+    <div class="edit-modal-card">
+      <div class="table-card-header">
+        <h4 id="dirEditUserTitle">Edit User</h4>
+        <button id="dirCloseEditUserModalBtn" class="btn" type="button">Close</button>
+      </div>
+      <form id="dirEditUserForm" class="simple-form" novalidate>
+        <div class="report-filters">
+          <div class="filter-field">
+            <label for="dirEditUserName">Name</label>
+            <input id="dirEditUserName" type="text" required>
+          </div>
+          <div class="filter-field">
+            <label for="dirEditUserEmail">Email</label>
+            <input id="dirEditUserEmail" type="email" required>
+          </div>
+          <div class="filter-field">
+            <label for="dirEditUserPhone">Contact</label>
+            <input id="dirEditUserPhone" type="tel" placeholder="+256700000000" required>
+          </div>
+          <div class="filter-field">
+            <label for="dirEditUsername">Username</label>
+            <input id="dirEditUsername" type="text" required>
+          </div>
+          <div class="filter-field">
+            <label for="dirEditPassword">Password</label>
+            <input id="dirEditPassword" type="password" placeholder="Leave blank to keep current password">
+          </div>
+          <div class="filter-field">
+            <label for="dirEditRole">Role</label>
+            <select id="dirEditRole" required>
+              <option value="">Select role</option>
+              <option value="Manager">Manager</option>
+              <option value="SalesAgent">Sales Agent</option>
+              <option value="Director">Director</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="dirEditBranch">Branch</label>
+            <input id="dirEditBranch" type="text" required>
+          </div>
+          <div class="filter-field profile-upload-field">
+            <label for="dirEditUserProfileImage">Profile Image</label>
+            <div class="profile-upload-wrap">
+              <img
+                id="dirEditUserProfilePreview"
+                class="profile-upload-preview"
+                src="../../../assets/images/profile.jpg"
+                alt="Edit profile image preview"
+              >
+              <input id="dirEditUserProfileImage" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+              <small class="section-note">Optional. Upload a profile image (max 2 MB).</small>
+            </div>
+          </div>
+        </div>
+        <div class="filter-actions">
+          <button class="btn" type="submit">Save Change</button>
+        </div>
+        <p id="dirEditUserStatus" class="section-note"></p>
+      </form>
+    </div>
+  </div>
+  <script src="../../../assets/js/toast.js"></script>
+  <script src="../../../assets/js/director-layout.js"></script>
+  <script src="../../../assets/js/director-policy-manager.js"></script>
+  <script src="../../../assets/js/director-user-management.js"></script>
+</body>
+</html>
+
+
+
+

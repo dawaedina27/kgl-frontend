@@ -1,0 +1,63 @@
+/* Developer note from me: I maintain these styles to keep the KGL UI consistent and readable across pages. */
+.agent-shell {
+  display: grid;
+  grid-template-columns: 1.1fr 1.4fr;
+  gap: 18px;
+}
+
+.agent-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.agent-hero {
+  border-left: 4px solid var(--accent);
+}
+
+.agent-hero h1 {
+  margin: 0 0 8px 0;
+  font-size: 24px;
+}
+
+.agent-hero p {
+  margin: 0;
+  color: #475569;
+}
+
+.agent-form-section h2,
+.agent-docs-section h2,
+.agent-records-section h2 {
+  margin-bottom: 10px;
+}
+
+.agent-docs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.agent-records-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.agent-mini-note {
+  color: #64748b;
+  font-size: 13px;
+}
+
+@media (max-width: 1200px) {
+  .agent-shell {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .agent-docs-grid,
+  .agent-records-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

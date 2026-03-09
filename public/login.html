@@ -1,0 +1,59 @@
+<!doctype html>
+<!-- Developer note from me: I structured this page to align with the KGL workflow and role-based navigation. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karibu Groceries LTD | Login</title>
+
+  <link rel="stylesheet" href="assets/css/theme.css" />
+  <link rel="stylesheet" href="assets/css/index.css" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+  <link rel="stylesheet" href="assets/css/toast.css" />
+</head>
+<body>
+
+  <div class="login-wrapper">
+    <form id="loginForm" class="login-card">
+
+      <div class="login-header">
+        <img src="assets/images/logo1.png" alt="Karibu Groceries LTD Logo" />
+        <h2>Karibu Groceries LTD Login</h2>
+      </div>
+
+      <div>
+      <label>Username</label>
+      <input id="username" type="text" required />
+      </div>
+
+      <div class="password-box">
+      <label>Password</label>
+            <input id="password" type="password" required />
+        <span id="togglePassword" role="button" aria-label="Toggle password visibility">
+          <i class="fa-solid fa-eye"></i>
+        </span>
+      </div>
+
+      <p id="error" class="error-msg"></p>
+
+      <button type="submit">Login</button>
+
+      <footer class="login-footer">
+        <small>&copy; Karibu Groceries LTD</small>
+        <br />      </footer>
+
+    </form>
+  </div>
+  <script src="assets/js/toast.js"></script>
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>
+
+
+
+
+

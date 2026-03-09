@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- Developer note from me: I structured this page to align with the KGL workflow and role-based navigation. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sales Agent Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../../assets/css/manager-pages.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="../../assets/js/toast.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="../../assets/css/toast.css" />
+</head>
+<body data-page-title="Sales Agent Dashboard" data-active-nav="dashboard">
+  <div id="salesAgentTopbar"></div>
+  <div id="salesAgentSidebar"></div>
+
+  <main class="main">
+    <section class="dashboard">
+      <!-- Welcome Section -->
+      <div class="card" style="margin-bottom: 20px;">
+        <h2>Welcome, <span id="agentName">Sales Agent</span></h2>
+      </div>
+
+      <!-- KPI Cards -->
+      <div class="kpis">
+        <div class="card kpi-card">
+          <h4><i class="fa-solid fa-sack-dollar kpi-icon"></i> Today's Sales</h4>
+          <b id="kpiTodaySales">UGX 0</b>
+        </div>
+        <div class="card kpi-card">
+          <h4><i class="fa-solid fa-money-bill-wave kpi-icon"></i> Cash Collected</h4>
+          <b id="kpiCash">UGX 0</b>
+        </div>
+        <div class="card kpi-card">
+          <h4><i class="fa-solid fa-file-invoice-dollar kpi-icon"></i> Credit Given</h4>
+          <b id="kpiCredit">UGX 0</b>
+        </div>
+        <div class="card kpi-card">
+          <h4><i class="fa-solid fa-weight-hanging kpi-icon"></i> Total Credit Given</h4>
+          <b id="kpiTotalCreditGiven">UGX 0</b>
+        </div>
+      </div>
+
+      <!-- Charts and Actions -->
+      <div class="charts">
+        <div class="card large">
+          <h4>Weekly Cash Sales vs Credit Sales</h4>
+          <canvas id="weeklySalesChart"></canvas>
+        </div>
+
+        <div class="card">
+          <h4>Quick Actions</h4>
+          <button class="btn" id="qaRecordSaleBtn" type="button">
+            <i class="fa-solid fa-plus"></i> Record New Sale
+          </button>
+          <button class="btn" id="qaTrackCreditBtn" type="button">
+            <i class="fa-solid fa-clock"></i> Track Credit
+          </button>
+          <button class="btn" id="qaViewReportsBtn" type="button">
+            <i class="fa-solid fa-chart-pie"></i> View Reports
+          </button>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="card report-table-card">
+        <div class="table-card-header">
+          <h4>Recent Transactions</h4>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Type</th>
+              <th>Produce</th>
+              <th>Amount</th>
+              <th>Buyer</th>
+            </tr>
+          </thead>
+          <tbody id="recentTxRows">
+            <tr><td colspan="5" class="empty-row">Loading data...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="../../assets/js/sales-agent-layout.js"></script>
+  <script src="../../assets/js/agent-dashboard.js"></script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!-- Developer note from me: I structured this page to align with the KGL workflow and role-based navigation. -->
+<html>
+<head>
+  <title>Procurement | Manager</title>
+
+  <link rel="stylesheet" href="../../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../../assets/css/procurement.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../../assets/css/toast.css" />
+</head>
+
+<body data-page-title="Procurement" data-active-nav="procurement">
+  <div id="managerTopbar"></div>
+  <div id="managerSidebar"></div>
+
+  <main class="main">
+    <div class="card">
+      <h3 style="margin-bottom:20px;">Record Produce Procurement</h3>
+      <form id="procurementForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="produceName">Produce Name</label>
+            <select id="produceName" name="produceName" required>
+              <option value="">-- Select Produce --</option>
+              <option value="Beans">Beans</option>
+              <option value="Grain Maize">Grain Maize</option>
+              <option value="Cow peas">Cow peas</option>
+              <option value="G-nuts">G-nuts</option>
+              <option value="Soybeans">Soybeans</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="produceType">Produce Type</label>
+            <select id="produceType" name="produceType" required>
+              <option value="">-- Select Type --</option>
+              <option value="Cereal">Cereal</option>
+              <option value="Legume">Legume</option>
+              <option value="Fruit">Fruit</option>
+              <option value="Vegetable">Vegetable</option>
+              <option value="other">Other</option>
+            </select>
+            <input type="text" id="produceTypeOther" name="produceTypeOther" placeholder="Type produce type" class="hidden" />
+          </div>
+
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" required>
+          </div>
+
+          <div class="form-group">
+            <label for="time">Time</label>
+            <input type="time" id="time" name="time" required>
+          </div>
+
+          <div class="form-group">
+            <label for="tonnage">Tonnage (kg)</label>
+            <input type="number" id="tonnage" name="tonnage" min="1000" required>
+          </div>
+
+          <div class="form-group">
+            <label for="unitCost">Unit Cost (UGX per kg)</label>
+            <input type="number" id="unitCost" name="unitCost" min="10000" required>
+          </div>
+
+          <div class="form-group">
+            <label for="amount">Amount (UGX)</label>
+            <input type="number" id="amount" name="amount" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="sellingPrice">Selling Price (UGX per kg)</label>
+            <input type="number" id="sellingPrice" name="sellingPrice" min="10000" required>
+          </div>
+
+          <div class="form-group">
+            <label for="totalSellingPrice">Total Selling Price (UGX)</label>
+            <input type="number" id="totalSellingPrice" name="totalSellingPrice" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="profit">Profit (UGX)</label>
+            <input type="number" id="profit" name="profit" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="dealerName">Dealer Name</label>
+            <input type="text" id="dealerName" name="dealerName" minlength="2" required>
+          </div>
+
+          <div class="form-group">
+            <label for="dealerContact">Dealer Contact</label>
+            <input type="tel" id="dealerContact" name="dealerContact" pattern="07[0-9]{8}" minlength="10" maxlength="10" inputmode="numeric" placeholder="07XXXXXXXX" required>
+          </div>
+
+          <div class="form-group">
+            <label for="branch">Branch</label>
+            <input type="text" id="branch" name="branch" value="Maganjo" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="produceImage">Produce Image (Optional)</label>
+            <input type="file" id="produceImage" name="produceImage" accept="image/*" capture="environment">
+            <div class="procure-image-placeholder">
+              <img id="produceImagePreview" src="../../assets/images/profile.jpg" alt="Produce image placeholder">
+              <small>Image placeholder</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="submit-btn">
+            <i class="fa fa-save"></i> Save Procurement
+          </button>
+          <button type="button" id="clearProcurementBtn" class="submit-btn clear-btn">
+            <i class="fa fa-eraser"></i> Clear Form
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </main>
+  <script src="../../assets/js/toast.js"></script>
+  <script src="../../assets/js/manager-layout.js"></script>
+  <script src="../../assets/js/procurement.js"></script>
+</body>
+</html>
+
+
+
+

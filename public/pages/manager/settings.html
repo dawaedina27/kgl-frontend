@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- Developer note from me: I structured this page to align with the KGL workflow and role-based navigation. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings | Manager</title>
+  <link rel="stylesheet" href="../../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../../assets/css/manager-pages.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../../assets/css/toast.css" />
+</head>
+<body data-page-title="Settings" data-active-nav="settings">
+  <div id="managerTopbar"></div>
+  <div id="managerSidebar"></div>
+
+  <main class="main">
+    <section class="dashboard">
+      <div class="card">
+        <h4>Manager Settings</h4>
+        <form id="managerSettingsForm" class="simple-form">
+          <div class="form-group">
+            <label for="settingProfileImage">Profile Picture</label>
+            <div class="profile-upload-wrap">
+              <img
+                id="settingProfilePreview"
+                class="profile-upload-preview"
+                src="../../assets/images/profile.jpg"
+                alt="Profile picture preview"
+              >
+              <input id="settingProfileImage" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+              <small class="section-note">Optional. Upload a profile image up to 2 MB.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="settingUsername">Display Name</label>
+            <input id="settingUsername" type="text" required>
+          </div>
+
+          <div class="form-group">
+            <label for="settingBranch">Branch</label>
+            <input id="settingBranch" type="text" required>
+          </div>
+
+          <div class="form-group">
+            <label for="settingTheme">Theme Mode</label>
+            <select id="settingTheme">
+              <option value="light">Light</option>
+              <option value="dark">Dark (Preview)</option>
+            </select>
+          </div>
+
+          <button class="btn" type="submit">Save Settings</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h4>Password Reset Request</h4>
+        <p class="section-note">
+          Password reset requires director approval. Submitting this form creates a pending request.
+        </p>
+
+        <form id="passwordResetRequestForm" class="simple-form">
+          <div class="form-group">
+            <label for="currentPassword">Current Password</label>
+            <input id="currentPassword" type="password" required>
+          </div>
+
+          <div class="form-group">
+            <label for="newPassword">New Password</label>
+            <input id="newPassword" type="password" minlength="6" required>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmNewPassword">Confirm New Password</label>
+            <input id="confirmNewPassword" type="password" minlength="6" required>
+          </div>
+
+          <button class="btn" type="submit">Request Password Reset</button>
+        </form>
+
+        <div id="resetRequestStatus" class="status-box">
+          No pending reset request.
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="../../assets/js/toast.js"></script>
+  <script src="../../assets/js/manager-layout.js"></script>
+  <script src="../../assets/js/settings.js"></script>
+</body>
+</html>
+
+
+
+

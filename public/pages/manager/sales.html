@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<!-- Developer note from me: I structured this page to align with the KGL workflow and role-based navigation. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sales | Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../../assets/css/sales.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../../assets/css/toast.css" />
+</head>
+<body data-page-title="Sales" data-active-nav="sales">
+  <div id="managerTopbar"></div>
+  <div id="managerSidebar"></div>
+
+  <main class="main">
+    <h1 class="page-title">Produce Sales</h1>
+
+    <div class="card sales-block-gap">
+      <label for="saleType"><strong>Select Sale Type</strong></label>
+      <select id="saleType" name="saleType" aria-label="Select sale type">
+        <option value="">-- Select --</option>
+        <option value="cash">Cash Sale</option>
+        <option value="credit">Credit Sale</option>
+      </select>
+    </div>
+
+    <section class="card hidden sales-block-gap" id="cashSection" aria-hidden="true">
+      <h2>Cash Sale</h2>
+      <form id="cashSaleForm" novalidate>
+        <div class="form-row">
+          <label for="produce">Produce</label>
+          <select id="produce" name="produce" required>
+            <option value="">-- Select Produce --</option>
+            <option value="Beans">Beans</option>
+            <option value="Grain Maize">Grain Maize</option>
+            <option value="Cow peas">Cow peas</option>
+            <option value="G-nuts">G-nuts</option>
+            <option value="Soybeans">Soybeans</option>
+          </select>
+          <button type="button" class="form-button secondary" id="viewCashProduceImageBtn">View Produce Image</button>
+          <div id="cashProduceImageGallery" class="produce-image-gallery hidden"></div>
+        </div>
+
+        <div class="form-row">
+          <label for="stock">Available Stock (kg)</label>
+          <input id="stock" name="stock" readonly placeholder="Available Stock">
+        </div>
+
+        <div class="form-row">
+          <label for="price">Price per Kg (UGX)</label>
+          <input id="price" name="price" readonly placeholder="Price per Kg">
+        </div>
+
+        <div class="form-row">
+          <label for="tonnage">Tonnage (kg)</label>
+          <input id="tonnage" name="tonnage" type="number" min="0" placeholder="Tonnage (kg)" required>
+        </div>
+
+        <div class="form-row">
+          <label for="amountPaid">Amount Paid (UGX)</label>
+          <input id="amountPaid" name="amountPaid" type="number" min="0" placeholder="Amount Paid (UGX)" readonly required>
+        </div>
+
+        <div class="form-row">
+          <label for="buyer">Buyer Name</label>
+          <input id="buyer" name="buyer" type="text" placeholder="Buyer Name" required>
+        </div>
+
+        <div class="form-row">
+          <label for="agent">Recorded by: Role - username</label>
+          <input id="agent" name="agent" type="text" placeholder="Recorded by: Role - username" readonly required>
+        </div>
+
+        <button type="submit" class="form-button">Add Cash Item To Cart</button>
+        <button type="button" class="form-button" id="clearCashBtn">Clear Record</button>
+      </form>
+    </section>
+
+    <section class="card hidden sales-block-gap" id="creditSection" aria-hidden="true">
+      <h2>Credit Sale</h2>
+      <form id="creditSaleForm" novalidate>
+        <div class="form-row">
+          <label for="cBuyer">Buyer Name</label>
+          <input id="cBuyer" name="cBuyer" type="text" placeholder="Buyer Name" required>
+        </div>
+
+        <div class="form-row">
+          <label for="nin">National ID (NIN)</label>
+          <input id="nin" name="nin" type="text" placeholder="National ID (NIN)" required>
+        </div>
+
+        <div class="form-row">
+          <label for="location">Location</label>
+          <input id="location" name="location" type="text" placeholder="Location" required>
+        </div>
+
+        <div class="form-row">
+          <label for="contact">Contact</label>
+          <input id="contact" name="contact" type="tel" placeholder="Contact" required>
+        </div>
+
+        <div class="form-row">
+          <label for="cProduce">Produce</label>
+          <select id="cProduce" name="cProduce" required>
+            <option value="">-- Select Produce --</option>
+            <option value="Beans">Beans</option>
+            <option value="Grain Maize">Grain Maize</option>
+            <option value="Cow peas">Cow peas</option>
+            <option value="G-nuts">G-nuts</option>
+            <option value="Soybeans">Soybeans</option>
+          </select>
+          <button type="button" class="form-button secondary" id="viewCreditProduceImageBtn">View Produce Image</button>
+          <div id="creditProduceImageGallery" class="produce-image-gallery hidden"></div>
+        </div>
+
+        <div class="form-row">
+          <label for="cStock">Available Stock (kg)</label>
+          <input id="cStock" name="cStock" readonly placeholder="Available Stock">
+        </div>
+
+        <div class="form-row">
+          <label for="cSellingPrice">Selling Price per Kg (UGX)</label>
+          <input id="cSellingPrice" name="cSellingPrice" readonly placeholder="Selling Price">
+        </div>
+
+        <div class="form-row">
+          <label for="type">Produce Type</label>
+          <input id="type" name="type" readonly placeholder="Produce Type">
+        </div>
+
+        <div class="form-row">
+          <label for="cTonnage">Tonnage (kg)</label>
+          <input id="cTonnage" name="cTonnage" type="number" min="0" placeholder="Tonnage (kg)" required>
+        </div>
+
+        <div class="form-row">
+          <label for="amountDue">Amount Due (UGX)</label>
+          <input id="amountDue" name="amountDue" type="number" min="0" placeholder="Amount Due (UGX)" readonly required>
+        </div>
+
+        <div class="form-row">
+          <label for="cAgent">Recorded by: Role - username</label>
+          <input id="cAgent" name="cAgent" type="text" placeholder="Recorded by: Role - username" readonly required>
+        </div>
+
+        <div class="form-row">
+          <label for="dispatchDate">Dispatch Date</label>
+          <input id="dispatchDate" name="dispatchDate" type="date" required>
+        </div>
+
+        <div class="form-row">
+          <label for="dueDate">Due Date</label>
+          <input id="dueDate" name="dueDate" type="date" required>
+        </div>
+
+        <button type="submit" class="form-button">
+          <i class="fa fa-cart-plus"></i> Add Credit Item To Cart
+        </button>
+        <button type="button" class="form-button" id="clearCreditBtn">Clear Record</button>
+      </form>
+    </section>
+
+    <section class="card sales-block-gap" id="salesCartSection">
+      <h2>Sales Cart</h2>
+      <div class="table-wrap">
+        <table id="cartTable">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Produce</th>
+              <th>Tonnage</th>
+              <th>Customer</th>
+              <th>Amount</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <p class="cart-total">Cart Total: <b id="cartTotalAmount">UGX 0</b></p>
+
+      <div class="cart-actions">
+        <button id="completeSaleBtn" type="button" class="btn">Place Order</button>
+        <button id="clearCartBtn" type="button" class="btn">Clear Cart</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Cash Sales Records</h2>
+      <table id="cashTable">
+        <thead>
+          <tr>
+            <th>Sale ID</th>
+            <th>Produce</th>
+            <th>Tonnage</th>
+            <th>Amount</th>
+            <th>Buyer</th>
+            <th>Agent</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section class="card sales-record-gap">
+      <h2>Credit Sales Records</h2>
+      <table id="creditTable">
+        <thead>
+          <tr>
+            <th>Sale ID</th>
+            <th>Buyer</th>
+            <th>Produce</th>
+            <th>Tonnage</th>
+            <th>Amount Due</th>
+            <th>Due Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <div id="produceImageModal" class="image-modal hidden" aria-hidden="true">
+      <div class="image-modal-content">
+        <h3 id="produceImageModalTitle">Produce Image</h3>
+        <img id="produceImagePreview" alt="Produce image preview" class="hidden">
+        <button type="button" class="form-button" id="closeProduceImageModalBtn">Close</button>
+      </div>
+    </div>
+  </main>
+  <script src="../../assets/js/toast.js"></script>
+  <script src="../../assets/js/manager-layout.js"></script>
+  <script src="../../assets/js/sales.js"></script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,26 @@
+/* Developer note from me: I maintain these styles to keep the KGL UI consistent and readable across pages. */
+:root {
+  /* Brand */
+  --primary-color: rgb(44, 35, 35);       /* Warm Gray */
+  --primary-dark: #292524;
+  --primary-light: #e7e5e4;
+
+  /* Backgrounds */
+  --bg-dark: #020617;
+  --bg-overlay: rgba(2, 6, 23, 0.92);
+  --bg-light: #ffffff;
+  --bg-muted: #fafaf9;
+
+  /* Text */
+  --text-dark: #020617;
+  --text-muted: #57534e;
+  --text-light: #ffffff;
+
+  /* Borders & Effects */
+  --border-color: #d6d3d1;
+  --focus-ring: rgba(87, 83, 78, 0.25);
+
+  /* Status */
+  --error-color: #b91c1c;
+}
+

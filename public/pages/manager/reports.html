@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<!-- Developer note from me: I structured this page to align with the KGL workflow and role-based navigation. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports | Manager</title>
+  <link rel="stylesheet" href="../../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../../assets/css/manager-pages.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="../../assets/js/toast.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="../../assets/css/toast.css" />
+</head>
+<body data-page-title="Reports" data-active-nav="reports">
+  <div id="managerTopbar"></div>
+  <div id="managerSidebar"></div>
+
+  <main class="main">
+    <section class="dashboard">
+      <div class="kpis">
+        <div class="card kpi-card">
+          <h4><i class="fa-solid fa-money-bill-wave kpi-icon"></i> Cash Sales Total</h4>
+          <b id="cashTotal">UGX 0</b>
+        </div>
+        <div class="card kpi-card">
+          <h4><i class="fa-solid fa-credit-card kpi-icon"></i> Credit Sales Total</h4>
+          <b id="creditTotal">UGX 0</b>
+        </div>
+        <div class="card kpi-card">
+          <h4><i class="fa-solid fa-hourglass-half kpi-icon"></i> Outstanding Credit</h4>
+          <b id="creditOutstanding">UGX 0</b>
+        </div>
+        <div class="card kpi-card">
+          <h4><i class="fa-solid fa-chart-line kpi-icon"></i> Profit (Sales - Procurement)</h4>
+          <b id="profitTotal">UGX 0</b>
+        </div>
+      </div>
+
+      <div class="card report-table-card">
+        <div class="table-card-header">
+          <h4>Cash Sales</h4>
+          <button id="cashMoreBtn" class="btn filter-toggle-btn" type="button">More</button>
+        </div>
+
+        <div class="report-download-block">
+          <button id="openReportBuilderBtn" class="btn report-download-btn" type="button">Download Report</button>
+          <div id="reportBuilderPanel" class="filter-panel hidden report-builder-panel">
+            <h4>Download Report Options</h4>
+            <div class="report-filters">
+              <div class="filter-field">
+                <label for="reportFormat">Format</label>
+                <select id="reportFormat">
+                  <option value="pdf">PDF</option>
+                  <option value="txt">TXT</option>
+                  <option value="csv">CSV</option>
+                  <option value="json">JSON</option>
+                </select>
+              </div>
+              <div class="filter-field">
+                <label>Report Options (Select 1 or more)</label>
+                <div id="reportTypeOptions" class="report-type-options">
+                  <label><input type="checkbox" name="reportTypeOption" value="general" checked> General Report</label>
+                  <label><input type="checkbox" name="reportTypeOption" value="sales_agent"> Specific Sales Agent Report</label>
+                  <label><input type="checkbox" name="reportTypeOption" value="manager_personal"> My Personal Manager Report</label>
+                  <label><input type="checkbox" name="reportTypeOption" value="cash"> Cash Sales Report</label>
+                  <label><input type="checkbox" name="reportTypeOption" value="credit"> Credit Sales Report</label>
+                  <label><input type="checkbox" name="reportTypeOption" value="procurement"> Procurement Report</label>
+                </div>
+              </div>
+              <div class="filter-field hidden" id="reportAgentField">
+                <label for="reportAgent">Sales Agent</label>
+                <select id="reportAgent">
+                  <option value="">Select Agent</option>
+                </select>
+              </div>
+              <div class="filter-field">
+                <label for="reportPeriod">Period</label>
+                <select id="reportPeriod">
+                  <option value="all_time">All Time</option>
+                  <option value="hourly">Hourly</option>
+                  <option value="daily">Daily</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="yearly">Yearly</option>
+                </select>
+              </div>
+            </div>
+            <div class="filter-actions">
+              <button id="downloadCustomReportBtn" class="btn" type="button">Generate & Download</button>
+              <button id="printEntireReportBtn" class="btn" type="button">Print Entire Report</button>
+              <button id="closeReportBuilderBtn" class="btn" type="button">Close</button>
+            </div>
+          </div>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Produce</th>
+              <th>Tonnage (kg)</th>
+              <th>Buyer</th>
+              <th>Agent</th>
+              <th>Amount (UGX)</th>
+            </tr>
+          </thead>
+          <tbody id="recentCashRows"></tbody>
+        </table>
+      </div>
+
+      <div class="card report-table-card">
+        <div class="table-card-header">
+          <h4>Credit Sales</h4>
+          <button id="creditMoreBtn" class="btn filter-toggle-btn" type="button">More</button>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Buyer</th>
+              <th>Produce</th>
+              <th>Tonnage (kg)</th>
+              <th>Agent</th>
+              <th>Contact</th>
+              <th>Amount Due (UGX)</th>
+              <th>Due Date</th>
+            </tr>
+          </thead>
+          <tbody id="recentCreditRows"></tbody>
+        </table>
+      </div>
+
+      <div class="card report-table-card">
+        <div class="table-card-header">
+          <h4>Inventory</h4>
+          <button id="inventoryMoreBtn" class="btn filter-toggle-btn" type="button">More</button>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Produce</th>
+              <th>Type</th>
+              <th>Stock (kg)</th>
+              <th>Selling Price (UGX)</th>
+              <th>Updated At</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="inventoryRows"></tbody>
+        </table>
+      </div>
+
+      <div class="card report-table-card">
+        <div class="table-card-header">
+          <h4>Damaged Produce</h4>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Produce</th>
+              <th>Lot Number</th>
+              <th>Quantity (kg)</th>
+              <th>Cause</th>
+              <th>Recorded By</th>
+              <th>Image</th>
+            </tr>
+          </thead>
+          <tbody id="damagedProduceRows"></tbody>
+        </table>
+      </div>
+
+      <div class="card report-table-card">
+        <div class="table-card-header">
+          <h4>Procurement Expenditure Summary</h4>
+          <button id="toggleProcurementSummaryBtn" class="btn filter-toggle-btn" type="button">View Summary</button>
+        </div>
+
+        <div id="procurementSummaryPanel" class="filter-panel hidden">
+          <div class="kpis">
+            <div class="card kpi-card">
+              <h4><i class="fa-solid fa-calendar-day kpi-icon"></i> Daily Total</h4>
+              <b id="expDaily">UGX 0</b>
+            </div>
+            <div class="card kpi-card">
+              <h4><i class="fa-solid fa-calendar-week kpi-icon"></i> Weekly Total</h4>
+              <b id="expWeekly">UGX 0</b>
+            </div>
+            <div class="card kpi-card">
+              <h4><i class="fa-solid fa-calendar-alt kpi-icon"></i> Monthly Total</h4>
+              <b id="expMonthly">UGX 0</b>
+            </div>
+            <div class="card kpi-card">
+              <h4><i class="fa-solid fa-chart-pie kpi-icon"></i> Quarterly Total</h4>
+              <b id="expQuarterly">UGX 0</b>
+            </div>
+            <div class="card kpi-card">
+              <h4><i class="fa-solid fa-calendar kpi-icon"></i> Annual Total</h4>
+              <b id="expAnnual">UGX 0</b>
+            </div>
+          </div>
+
+          <h4 style="margin: 16px 0 10px;">Total Expenditure Per Produce</h4>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Produce</th>
+                <th>Total Tonnage (kg)</th>
+                <th>Total Expenditure (UGX)</th>
+              </tr>
+            </thead>
+            <tbody id="expenditureByProduceRows"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card report-table-card" id="personalPeriodCard">
+        <div class="table-card-header">
+          <h4>My Personal Sales Report</h4>
+          <button id="togglePersonalReportBtn" class="btn filter-toggle-btn" type="button">View My Report</button>
+        </div>
+
+        <div id="personalPeriodPanel" class="hidden">
+        <div class="report-filters">
+          <div class="filter-field">
+            <label for="personalPeriodFilter">Period</label>
+            <select id="personalPeriodFilter">
+              <option value="hourly">Hourly</option>
+              <option value="daily" selected>Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="quarterly">Quarterly</option>
+              <option value="yearly">Yearly</option>
+            </select>
+          </div>
+          <div class="filter-actions">
+            <button id="applyPersonalPeriodBtn" class="btn" type="button">Apply Period</button>
+          </div>
+        </div>
+
+        <div class="kpis">
+          <div class="card kpi-card">
+            <h4><i class="fa-solid fa-receipt kpi-icon"></i> Transactions</h4>
+            <b id="personalTxCount">0</b>
+          </div>
+          <div class="card kpi-card">
+            <h4><i class="fa-solid fa-sack-dollar kpi-icon"></i> Cash Total</h4>
+            <b id="personalCashTotal">UGX 0</b>
+          </div>
+          <div class="card kpi-card">
+            <h4><i class="fa-solid fa-credit-card kpi-icon"></i> Credit Total</h4>
+            <b id="personalCreditTotal">UGX 0</b>
+          </div>
+          <div class="card kpi-card">
+            <h4><i class="fa-solid fa-coins kpi-icon"></i> Total Sales</h4>
+            <b id="personalSalesTotal">UGX 0</b>
+          </div>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date/Time</th>
+              <th>Type</th>
+              <th>Produce</th>
+              <th>Tonnage</th>
+              <th>Buyer</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="personalSalesRows"></tbody>
+        </table>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <div id="damagedImageModal" class="edit-modal hidden">
+    <div class="edit-modal-card">
+      <div class="table-card-header">
+        <h4>Damaged Produce Image</h4>
+        <button id="closeDamagedImageModalBtn" class="btn filter-toggle-btn" type="button">Close</button>
+      </div>
+      <img id="damagedImageModalPreview" class="produce-image-modal-preview" src="" alt="Damaged produce image preview">
+    </div>
+  </div>
+
+  <script src="../../assets/js/manager-layout.js"></script>
+  <script src="../../assets/js/reports.js"></script>
+</body>
+</html>
+
+
+
+

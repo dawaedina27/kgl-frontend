@@ -1,0 +1,452 @@
+<!doctype html>
+<!-- Developer note from me: I structured this page to align with the KGL workflow and role-based navigation. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Director Dashboard</title>
+  <link rel="stylesheet" href="../../assets/css/dashboard.css" />
+  <link rel="stylesheet" href="../../assets/css/manager-pages.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="../../assets/js/toast.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <link rel="stylesheet" href="../../assets/css/toast.css" />
+</head>
+<body data-page-title="Director Dashboard" data-active-nav="dashboard">
+  <div id="directorTopbar"></div>
+  <div id="directorSidebar"></div>
+
+  <main class="main">
+    <section class="dashboard">
+      <div id="dirSalesKpisPrimary" class="kpis">
+        <div class="card">
+          <h4>Total Sales</h4>
+          <b id="dirTotalSales">UGX 0</b>
+        </div>
+        <div class="card">
+          <h4>Total Cash Sales</h4>
+          <b id="dirTotalCashSales">UGX 0</b>
+        </div>
+        <div class="card">
+          <h4>Total Procurement</h4>
+          <b id="dirTotalProcurement">UGX 0</b>
+        </div>
+        <div class="card">
+          <h4>Total Profit</h4>
+          <b id="dirTotalProfit">UGX 0</b>
+        </div>
+        <div class="card">
+          <h4>At Hand Profit</h4>
+          <b id="dirAtHandProfit">UGX 0</b>
+        </div>
+        <div class="card">
+          <h4>Outstanding Credit</h4>
+          <b id="dirOutstandingCredit">UGX 0</b>
+        </div>
+        <div class="card">
+          <h4>Total Damaged Stock</h4>
+          <b id="dirTotalDamagedStock">0 kg</b>
+        </div>
+        <div class="card">
+          <h4>Damaged Stock Amount</h4>
+          <b id="dirDamagedStockAmount">UGX 0</b>
+        </div>
+      </div>
+
+      <div id="dirSalesKpisSecondary" class="kpis">
+        <div class="card">
+          <h4>Top Branch</h4>
+          <b id="dirTopBranch">-</b>
+        </div>
+        <div class="card">
+          <h4>Top Produce</h4>
+          <b id="dirTopProduce">-</b>
+        </div>
+        <div class="card">
+          <h4>Overdue Credits</h4>
+          <b id="dirOverdueCredits">0</b>
+        </div>
+      </div>
+
+      <div id="dirQuickActions" class="card quick-actions-card">
+        <h4>Quick Actions</h4>
+        <div class="quick-actions-grid">
+          <button id="dirQaStockBtn" class="btn" type="button">View Stock Report</button>
+          <button id="dirQaCashBtn" class="btn" type="button">View Cash Sales</button>
+          <button id="dirQaCreditBtn" class="btn" type="button">View Credit Sales</button>
+          <button id="dirQaAdminBtn" class="btn" type="button">Open Administration</button>
+        </div>
+      </div>
+
+      <div id="dirPolicyCard" class="card report-gap-top hidden">
+        <h4>Goods Condition Policies</h4>
+        <p class="section-note">Manage policies shown to Managers and Sales Agents for Returned Goods and Damaged Produce.</p>
+        <div class="report-filters">
+          <div class="filter-field">
+            <label for="returnedPolicyText">Eligible Sales For Return Policy</label>
+            <textarea id="returnedPolicyText" rows="3" placeholder="Type return policy"></textarea>
+            <div class="filter-actions">
+              <button id="generateReturnedPoliciesBtn" class="btn" type="button">Generate Return Policies</button>
+              <button id="addReturnedPolicyBtn" class="btn" type="button">Add New Policy</button>
+            </div>
+            <ul id="returnedPolicyRows" class="policy-list"></ul>
+          </div>
+          <div class="filter-field">
+            <label for="damagedPolicyText">Damaged Produce Policy</label>
+            <textarea id="damagedPolicyText" rows="3" placeholder="Type damaged produce policy"></textarea>
+            <div class="filter-actions">
+              <button id="generateDamagedPoliciesBtn" class="btn" type="button">Generate Damaged Policies</button>
+              <button id="addDamagedPolicyBtn" class="btn" type="button">Add New Policy</button>
+            </div>
+            <ul id="damagedPolicyRows" class="policy-list"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="dirSalesCharts" class="charts">
+        <div class="card large">
+          <h4>Branch Sales Comparison</h4>
+          <canvas id="dirBranchSalesChart"></canvas>
+        </div>
+        <div class="card large">
+          <h4>Produce Market Ranking (Highest to Lowest)</h4>
+          <canvas id="dirProduceRankingChart"></canvas>
+        </div>
+        <div class="card large">
+          <h4>Financial Mix (Procurement, Sales, Profit/Loss)</h4>
+          <canvas id="dirFinancialMixPieChart"></canvas>
+        </div>
+        <div class="card large">
+          <h4>Weekly Sales by Produce</h4>
+          <canvas id="dirWeeklyProduceLineChart"></canvas>
+        </div>
+      </div>
+
+      <div id="general-report" class="card">
+        <h4>General Report (Aggregated Sales - All Branches)</h4>
+        <div class="filter-actions">
+          <button id="dirToggleFiltersBtn" class="btn" type="button">Filter</button>
+          <button id="dirToggleDownloadBtn" class="btn" type="button">Download Report</button>
+        </div>
+
+        <div id="dirFilterPanel" class="filter-panel hidden">
+          <div class="report-filters">
+            <div class="filter-field">
+              <label for="dirBranchFilter">Branch</label>
+              <select id="dirBranchFilter">
+                <option value="all">All Branches</option>
+              </select>
+            </div>
+            <div class="filter-field">
+              <label for="dirAgentFilter">Sales Agent</label>
+              <select id="dirAgentFilter">
+                <option value="all">All Agents</option>
+              </select>
+            </div>
+            <div class="filter-field">
+              <label for="dirSaleTypeFilter">Sale Type</label>
+              <select id="dirSaleTypeFilter">
+                <option value="all">All Types</option>
+                <option value="cash">Cash</option>
+                <option value="credit">Credit</option>
+              </select>
+            </div>
+            <div class="filter-field">
+              <label for="dirDateFromFilter">Date From</label>
+              <input id="dirDateFromFilter" type="date">
+            </div>
+            <div class="filter-field">
+              <label for="dirDateToFilter">Date To</label>
+              <input id="dirDateToFilter" type="date">
+            </div>
+          </div>
+
+          <div class="filter-actions">
+            <button id="dirApplyFiltersBtn" class="btn" type="button">Apply Filters</button>
+            <button id="dirResetFiltersBtn" class="btn" type="button">Reset Filters</button>
+          </div>
+        </div>
+
+        <div id="dirDownloadPanel" class="filter-panel hidden">
+          <div class="report-filters">
+            <div class="filter-field">
+              <label for="dirDownloadScope">Report Type</label>
+              <select id="dirDownloadScope">
+                <option value="entire">Entire Report</option>
+                <option value="aggregate">Aggregated Summary Only</option>
+                <option value="detailed">Detailed Records Only</option>
+              </select>
+            </div>
+            <div class="filter-field">
+              <label for="dirDownloadDateFrom">Date From</label>
+              <input id="dirDownloadDateFrom" type="date">
+            </div>
+            <div class="filter-field">
+              <label for="dirDownloadDateTo">Date To</label>
+              <input id="dirDownloadDateTo" type="date">
+            </div>
+            <div class="filter-field">
+              <label for="dirDownloadProduce">Produce</label>
+              <input id="dirDownloadProduce" type="text" placeholder="e.g. beans">
+            </div>
+          </div>
+          <div class="filter-actions">
+            <button id="dirDownloadPdfBtn" class="btn" type="button">Download PDF</button>
+            <button id="dirDownloadCsvBtn" class="btn" type="button">Download CSV</button>
+            <button id="dirDownloadJsonBtn" class="btn" type="button">Download JSON</button>
+            <button id="dirDownloadTxtBtn" class="btn" type="button">Download TXT</button>
+          </div>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Branch</th>
+              <th>Agent</th>
+              <th>Transactions</th>
+              <th>Total Tonnage (kg)</th>
+              <th>Cash (UGX)</th>
+              <th>Credit (UGX)</th>
+              <th>Total Sales (UGX)</th>
+            </tr>
+          </thead>
+          <tbody id="dirAggregateRows"></tbody>
+        </table>
+        <button id="dirMoreBtn" class="btn" type="button" style="width:auto; margin-top:10px;">More</button>
+      </div>
+
+      <div id="dirDamagedProduceReport" class="card report-gap-top">
+        <h4>Damaged Produce Report (All Branches)</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Branch</th>
+              <th>Produce</th>
+              <th>Lot Number</th>
+              <th>Quantity (kg)</th>
+              <th>Cause</th>
+              <th>Recorded By</th>
+              <th>Image</th>
+            </tr>
+          </thead>
+          <tbody id="dirDamagedProduceRows">
+            <tr><td colspan="8">Loading damaged produce records...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="dirReturnedGoodsReport" class="card report-gap-top">
+        <h4>Returned Goods Report (All Branches)</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Return ID</th>
+              <th>Original Sale ID</th>
+              <th>Type</th>
+              <th>Date</th>
+              <th>Branch</th>
+              <th>Buyer</th>
+              <th>Produce</th>
+              <th>Tonnage (kg)</th>
+              <th>Amount (UGX)</th>
+              <th>Returned By</th>
+              <th>Condition</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody id="dirReturnedGoodsRows">
+            <tr><td colspan="12">Loading returned goods records...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="view-cash-sales" class="card">
+        <h4>View Cash Sales</h4>
+        <div class="kpis">
+          <div class="card">
+            <h4>Total Cash Sales</h4>
+            <b id="dirCashTotalSales">UGX 0</b>
+          </div>
+          <div class="card">
+            <h4>Weekly Cash Turnover</h4>
+            <b id="dirCashWeeklyTurnover">UGX 0</b>
+          </div>
+          <div class="card">
+            <h4>Top Produce Sold</h4>
+            <b id="dirCashTopProduce">-</b>
+          </div>
+          <div class="card">
+            <h4>Top Cash Branch</h4>
+            <b id="dirCashTopBranch">-</b>
+          </div>
+          <div class="card">
+            <h4>Top Cash Sales Agent</h4>
+            <b id="dirCashTopAgent">-</b>
+          </div>
+        </div>
+        <div class="filter-actions">
+          <button id="dirPrintCashBtn" class="btn" type="button">Print Cash Sales</button>
+        </div>
+        <div class="charts">
+          <div class="card large">
+            <h4>Cash Sales by Branch (UGX)</h4>
+            <canvas id="dirCashBranchChart"></canvas>
+          </div>
+          <div class="card large">
+            <h4>Cash Sales by Produce</h4>
+            <canvas id="dirCashProducePieChart"></canvas>
+          </div>
+        </div>
+        <h4>Cash Sales Transactions</h4>
+        <div class="table-wrap">
+          <table id="dirCashSalesTable" class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Branch</th>
+                <th>Agent</th>
+                <th>Produce</th>
+                <th>Tonnage (kg)</th>
+                <th>Amount (UGX)</th>
+              </tr>
+            </thead>
+            <tbody id="dirCashSalesRows">
+              <tr><td colspan="6">Loading cash sales...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="view-credit-sales" class="card">
+        <h4>Credit Sales Report</h4>
+        <div class="kpis">
+          <div class="card">
+            <h4>Total Credit Sales</h4>
+            <b id="dirCreditTotalSales">UGX 0</b>
+          </div>
+          <div class="card">
+            <h4>Credit Transactions</h4>
+            <b id="dirCreditTransactions">0</b>
+          </div>
+          <div class="card">
+            <h4>Overdue Credits</h4>
+            <b id="dirCreditOverdue">0</b>
+          </div>
+          <div class="card">
+            <h4>Top Credit Branch</h4>
+            <b id="dirCreditTopBranch">-</b>
+          </div>
+        </div>
+        <div class="charts">
+          <div class="card large">
+            <h4>Credit Sales by Branch (UGX)</h4>
+            <canvas id="dirCreditBranchChart"></canvas>
+          </div>
+          <div class="card large">
+            <h4>Credit Sales by Produce</h4>
+            <canvas id="dirCreditProducePieChart"></canvas>
+          </div>
+        </div>
+        <h4>Credit Sales Transactions</h4>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Branch</th>
+                <th>Agent</th>
+                <th>Produce</th>
+                <th>Tonnage (kg)</th>
+                <th>Amount Due (UGX)</th>
+                <th>Due Date</th>
+              </tr>
+            </thead>
+            <tbody id="dirCreditSalesRows">
+              <tr><td colspan="7">Loading credit sales...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="view-stock" class="card report-gap-top">
+        <h4>View Stock (All Branches)</h4>
+        <div class="kpis">
+          <div class="card">
+            <h4>Total Stock Tonnage</h4>
+            <b id="dirStockTotalTonnage">0 kg</b>
+          </div>
+          <div class="card">
+            <h4>Total Produce Procured</h4>
+            <b id="dirTotalProduceProcured">0</b>
+          </div>
+          <div class="card">
+            <h4>Lowest Procured Produce</h4>
+            <b id="dirLowestProcuredProduce">-</b>
+          </div>
+          <div class="card">
+            <h4>Highest Procured Produce</h4>
+            <b id="dirHighestProcuredProduce">-</b>
+          </div>
+          <div class="card">
+            <h4>Low Stock Items</h4>
+            <b id="dirLowStockItems">0</b>
+          </div>
+          <div class="card">
+            <h4>Out of Stock Items</h4>
+            <b id="dirOutOfStockItems">0</b>
+          </div>
+        </div>
+
+        <div class="charts">
+          <div class="card large">
+            <h4>Stock by Branch (kg)</h4>
+            <canvas id="dirStockByBranchChart"></canvas>
+          </div>
+          <div class="card large">
+            <h4>Stock by Produce Type</h4>
+            <canvas id="dirStockTypePieChart"></canvas>
+          </div>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Branch</th>
+              <th>Produce</th>
+              <th>Type</th>
+              <th>Available Tonnage (kg)</th>
+              <th>Status</th>
+              <th>Selling Price (UGX)</th>
+              <th>Last Updated</th>
+            </tr>
+          </thead>
+          <tbody id="dirStockRows">
+            <tr><td colspan="7">Loading stock report...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+  </main>
+
+  <div id="dirDamagedImageModal" class="edit-modal hidden">
+    <div class="edit-modal-card">
+      <div class="table-card-header">
+        <h4>Damaged Produce Image</h4>
+        <button id="dirCloseDamagedImageModalBtn" class="btn filter-toggle-btn" type="button">Close</button>
+      </div>
+      <img id="dirDamagedImageModalPreview" class="produce-image-modal-preview" src="" alt="Damaged produce image preview">
+    </div>
+  </div>
+
+  <script src="../../assets/js/director-layout.js"></script>
+  <script src="../../assets/js/director-dashboard.js"></script>
+  <script src="../../assets/js/director-policy-manager.js"></script>
+</body>
+</html>
+
+
+
+

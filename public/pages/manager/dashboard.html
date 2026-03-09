@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!-- Developer note from me: I structured this page to align with the KGL workflow and role-based navigation. -->
+<html>
+  <head>
+    <title>Manager Dashboard</title>
+
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="../../assets/js/toast.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="../../assets/css/toast.css" />
+</head>
+
+  <body data-page-title="Manager Dashboard" data-active-nav="dashboard">
+    <div id="managerTopbar"></div>
+    <div id="managerSidebar"></div>
+
+    <main class="main">
+      <section class="dashboard">
+        <div class="kpis">
+          <div class="card kpi-card">
+            <h4><i class="fa-solid fa-boxes-stacked kpi-icon"></i> Total Stock</h4>
+            <b id="totalStock">0 kg</b>
+          </div>
+
+          <div class="card kpi-card">
+            <h4><i class="fa-solid fa-cash-register kpi-icon"></i> Total Sales</h4>
+            <b id="totalSales">UGX 0</b>
+          </div>
+
+          <div class="card kpi-card">
+            <h4><i class="fa-solid fa-chart-line kpi-icon"></i> Total Profit</h4>
+            <b id="totalProfit">UGX 0</b>
+          </div>
+          <div class="card kpi-card">
+            <h4><i class="fa-solid fa-triangle-exclamation kpi-icon"></i> Total Damaged Stock</h4>
+            <b id="totalDamagedStock">0 kg</b>
+          </div>
+
+        </div>
+
+        <div class="charts">
+          <div class="card large">
+            <h4>Sales vs Procurement (UGX)</h4>
+            <canvas id="salesChart"></canvas>
+          </div>
+
+          <div class="card">
+            <h4>Quick Actions</h4>
+            <button class="btn" id="mgrQaProcurementBtn" type="button">Add Procurement</button>
+            <button class="btn" id="mgrQaSalesBtn" type="button">Record Sale</button>
+            <button class="btn" id="mgrQaReportsBtn" type="button">View Reports</button>
+          </div>
+        </div>
+
+        <div class="charts">
+          <div class="card large">
+            <h4>Stock by Produce (kg)</h4>
+            <canvas id="stockByProduceChart"></canvas>
+          </div>
+          <div class="card large">
+            <h4>Sales Mix (Cash vs Credit)</h4>
+            <canvas id="salesMixChart"></canvas>
+          </div>
+        </div>
+      </section>
+    </main>
+  <script src="../../assets/js/manager-layout.js"></script>
+  <script src="../../assets/js/dashboard.js"></script>
+</body>
+</html>
+
+
+
+
